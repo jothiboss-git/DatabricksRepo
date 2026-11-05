@@ -1,0 +1,37 @@
+resources:
+  jobs:
+    rag_pipeline_job:
+      name: RAG Pipeline Job
+      tasks:
+        - task_key: RAG_Pipeline
+          disabled: false
+          email_notifications: {}
+          notebook_task:
+            notebook_path: ../src/rag_pipeline_job/RAG_KnowledgeBase_Document_Pipeline.ipynb
+            source: WORKSPACE
+          run_if: ALL_SUCCESS
+          timeout_seconds: 0
+          webhook_notifications: {}
+      parameters:
+        - name: volume_path
+          default: /Volumes/agentic_ai/01_bronze/raw_documents
+        - name: index_name
+          default: agentic_ai.03_gold.document_index
+        - name: chunk_size
+          default: "512"
+        - name: chunk_overlap
+          default: "20"
+        - name: log_table
+          default: agentic_ai.01_bronze.document_processing_log
+      email_notifications:
+        no_alert_for_skipped_runs: false
+      max_concurrent_runs: 1
+      performance_target: PERFORMANCE_OPTIMIZED
+      queue:
+        enabled: true
+      timeout_seconds: 0
+      trigger:
+        file_arrival:
+          url: /Volumes/agentic_ai/01_bronze/raw_documents/
+        pause_status: UNPAUSED
+      webhook_notifications: {}
