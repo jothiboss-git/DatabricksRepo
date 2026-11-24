@@ -1,0 +1,19 @@
+schema_version = 1
+
+[agent]
+framework = "openai"
+server = "agentbricks"
+deployment_name = "newagent"
+
+[memory_store]
+name = "newagent-oqmsfn-memory"
+
+[session_store]
+name = "newagent-oqmsfn-sessions"
+
+[tracing]
+experiment_name = "/Shared/agentbricks_traces/newagent-oqmsfn"
+
+[[tools]]
+id = "get_last_purchased_item"
+source = { kind = "uc_function", function = "agentic_ai.ai_services.get_last_purchased_item" }
