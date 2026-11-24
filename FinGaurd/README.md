@@ -6,6 +6,10 @@ FinGuard is an end-to-end, real-time financial fraud detection system built enti
 
 ## 1. Architecture Overview
 
+![FinGuard pipeline architecture](images/finguard_pipeline_architecture.png)
+
+*Figure 1 — FinGuard end-to-end data flow: Kafka + Auto Loader ingestion → Bronze → Silver → Gold → email alerts and the monitoring dashboard.*
+
 ```
 Confluent Cloud Kafka (topic: my_topic)          fraud_watchlist CSV/JSON files
               │                                            (Unity Catalog Volume)
@@ -52,6 +56,7 @@ Confluent Cloud Kafka (topic: my_topic)          fraud_watchlist CSV/JSON files
 | `Fingaurd Pipeline/` | Main SDP pipeline source (bronze, silver, gold, alert subfolders) — see §3. |
 | `Customer_Ingestion_Pipeline/` | Separate SDP pipeline that ingests the customer dimension (bronze → silver). |
 | `New Pipeline 2026-10-09 21:48/` | Scratch/empty pipeline draft (transformations folder is blank) — kept for reference. |
+| `images/` | Rendered images referenced by this README (pipeline architecture diagram, dashboard overview). |
 
 ---
 
@@ -94,6 +99,10 @@ Pipeline ID: `82412a9d-7a18-4fba-89af-fd56cf57361f` · Library: `Silver/**`.
 ---
 
 ## 5. Monitoring Dashboard
+
+![FinGuard Fraud Monitoring Dashboard overview](images/finguard_dashboard_overview.png)
+
+*Figure 2 — Dashboard overview (KPIs, alert breakdowns, and customer risk-score distribution), rendered from the same gold/silver tables the live AI/BI dashboard queries.*
 
 **FinGuard Fraud Monitoring Dashboard** (AI/BI) — 13 widgets:
 
